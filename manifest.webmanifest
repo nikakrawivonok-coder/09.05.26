@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#120d09" />
   <title>Польовий Модуль — V5</title>
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="styles.v5.css" />
+  <link rel="stylesheet" href="styles.v5-1.css?v=51" />
 </head>
 <body>
   <script>
@@ -37,6 +37,8 @@
       <div><span>Персонаж</span><strong id="playerLabel">fox</strong></div>
       <div><span>Синхронізація</span><strong id="syncLabel">локально</strong></div>
     </section>
+    <noscript><div class="runtime-error">JavaScript вимкнено. Кнопки й ролі не працюватимуть.</div></noscript>
+    <div class="runtime-error" id="runtimeError">Модуль завантажується… якщо це повідомлення не зникне, файл app.v5-1.js не підключився.</div>
 
     <section class="identity-panel">
       <div class="portrait" aria-label="Портрет сталкера">
@@ -214,6 +216,6 @@
 
     <div class="toast" id="toast" hidden></div>
   </main>
-  <script src="app.v5.js"></script>
+  <script src="app.v5-1.js?v=51" defer></script>
 </body>
 </html>
