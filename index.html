@@ -6,9 +6,16 @@
   <meta name="theme-color" content="#120d09" />
   <title>Польовий Модуль — V3</title>
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.v4-1.css" />
 </head>
 <body>
+  <script>
+    (function(){
+      var q = new URLSearchParams(location.search);
+      var r = (q.get('role') || 'player').toLowerCase().trim();
+      document.body.classList.add(r === 'gm' ? 'role-gm' : 'role-player');
+    })();
+  </script>
   <div id="scanlines"></div>
   <div id="noise"></div>
 
@@ -205,6 +212,6 @@
 
     <div class="toast" id="toast" hidden></div>
   </main>
-  <script src="app.js"></script>
+  <script src="app.v4-1.js"></script>
 </body>
 </html>
