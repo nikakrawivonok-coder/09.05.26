@@ -111,3 +111,116 @@ button,input,textarea,select{font:inherit}
   .scene-card{grid-template-columns:1fr}
   .scene-card p{font-size:18px}
 }
+
+
+/* === V3.1 mobile-fit patch ===
+   Fixes clipping of the upper-right status block on narrow phone screens.
+   The previous V3 kept the 2-column stat grid too close to the visual mockup,
+   but real phone browsers have less usable width because of browser chrome.
+*/
+.bio-card {
+  min-width: 0;
+}
+
+.identity-panel {
+  grid-template-columns: 112px minmax(0, 1fr);
+}
+
+.stats-grid {
+  grid-template-columns: 1fr;
+}
+
+.stat-line {
+  min-height: 58px;
+  padding: 8px 10px 7px;
+  border-right: none !important;
+}
+
+.stat-head {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.stat-name {
+  min-width: 0;
+  white-space: nowrap;
+  font-size: 17px;
+}
+
+.stat-head strong {
+  white-space: nowrap;
+  font-size: 17px;
+}
+
+.dots {
+  padding-left: 28px;
+  margin-top: 6px;
+  gap: 4px;
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+}
+
+@media (min-width: 421px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-line {
+    min-height: 82px;
+    border-right: 1px solid rgba(44,28,14,.16) !important;
+  }
+
+  .stat-line:nth-child(2n) {
+    border-right: none !important;
+  }
+
+  .stat-name {
+    font-size: 16px;
+  }
+
+  .stat-head strong {
+    font-size: 16px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 390px) {
+  .identity-panel {
+    grid-template-columns: 96px minmax(0, 1fr);
+  }
+
+  .portrait {
+    min-height: 188px;
+  }
+
+  .bio-top h2 {
+    font-size: 38px;
+  }
+
+  .rad-symbol {
+    font-size: 42px;
+  }
+
+  .stat-name,
+  .stat-head strong {
+    font-size: 16px;
+  }
+
+  .stat-icon {
+    font-size: 21px;
+  }
+
+  .stat-line {
+    min-height: 56px;
+  }
+
+  .dots {
+    padding-left: 25px;
+  }
+}
