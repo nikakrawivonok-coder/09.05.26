@@ -224,3 +224,59 @@ button,input,textarea,select{font:inherit}
     padding-left: 25px;
   }
 }
+
+
+/* === V4 Roles patch === */
+.session-strip{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:6px;
+  margin:-4px 0 10px;
+}
+.session-strip div{
+  border:1px solid #4e321d;
+  border-radius:8px;
+  padding:6px 7px;
+  background:linear-gradient(180deg,#21150e,#0b0705);
+  box-shadow:inset 0 0 0 1px rgba(255,226,170,.06), 0 3px 8px rgba(0,0,0,.35);
+  min-width:0;
+}
+.session-strip span{
+  display:block;
+  color:#9f8558;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+.session-strip strong{
+  display:block;
+  color:#e8cc8d;
+  font-size:14px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+body.role-player .gm-only{
+  display:none !important;
+}
+.role-warning{
+  position:relative;
+  z-index:2;
+  margin:6px 0 10px;
+  padding:9px 10px;
+  border:1px solid #6e4723;
+  border-radius:9px;
+  background:linear-gradient(180deg,#e2ca98,#b28f59);
+  color:#16100b;
+  font-weight:800;
+  box-shadow:0 4px 10px rgba(0,0,0,.35);
+}
+body.role-player .bottom-nav{
+  grid-template-columns:repeat(4,1fr);
+}
+@media(max-width:390px){
+  .session-strip strong{font-size:12px}
+  .session-strip span{font-size:9px}
+}

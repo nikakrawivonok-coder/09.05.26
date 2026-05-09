@@ -21,11 +21,52 @@ const defaultData = {
     { item: "Автомат", count: 1, note: "дозволяє стріляти чергою" }
   ],
   journal: [
-    { time: nowTime(), text: "КПК активовано. Сигнал нестабільний. Дані сцени завантажено." }
+    { time: nowTime(), text: "Польовий модуль активовано. Сигнал нестабільний. Дані сцени завантажено." }
   ]
 };
 
 let data = load();
+
+const params = new URLSearchParams(window.location.search);
+const appSession = {
+  role: (params.get("role") || "player").toLowerCase() === "gm" ? "gm" : "player",
+  room: params.get("room") || "local",
+  player: params.get("player") || "fox"
+};
+
+function applyRoleMode(){
+  document.body.classList.toggle("role-gm", appSession.role === "gm");
+  document.body.classList.toggle("role-player", appSession.role !== "gm");
+
+  const roomLabel = document.querySelector("#roomLabel");
+  const roleLabel = document.querySelector("#roleLabel");
+  const playerLabel = document.querySelector("#playerLabel");
+
+  if(roomLabel) roomLabel.textContent = appSession.room;
+  if(roleLabel) roleLabel.textContent = appSession.role === "gm" ? "Майстер" : "Гравець";
+  if(playerLabel) playerLabel.textContent = appSession.player;
+
+  if(appSession.role !== "gm"){
+    const activeMaster = document.querySelector('.screen.active[data-screen="master"]');
+    if(activeMaster) switchScreen("state");
+  }
+
+  const already = document.querySelector("#roleNotice");
+  if(!already){
+    const strip = document.querySelector("#sessionStrip");
+    if(strip){
+      const note = document.createElement("div");
+      note.id = "roleNotice";
+      note.className = "role-warning";
+      note.textContent = appSession.role === "gm"
+        ? "Режим Майстра: службова вкладка доступна. Поки що дані зберігаються локально."
+        : "Режим Гравця: майстерська вкладка прихована. Поки що дані зберігаються локально.";
+      strip.insertAdjacentElement("afterend", note);
+      setTimeout(() => note.remove(), 4500);
+    }
+  }
+}
+
 
 function nowTime(){
   const d = new Date();
@@ -172,6 +213,7 @@ function escapeHtml(str){ return String(str).replace(/[&<>"']/g, m => ({'&':'&am
 function escapeAttr(str){ return escapeHtml(str).replace(/"/g, "&quot;");}
 
 function switchScreen(target){
+  if(target === "master" && appSession.role !== "gm") target = "state";
   qsa(".screen").forEach(s => s.classList.toggle("active", s.dataset.screen === target));
   qsa(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.target === target));
   qs("#rollResult").hidden = true;
@@ -241,11 +283,11 @@ function triggerFlicker(){
 
 function randomKpkWarning(){
   const options = [
-    "КПК: зафіксовано аномальну активність. Болти рекомендовано тримати напоготові.",
-    "КПК: рівень перешкод зріс. Радіосигнал нестабільний.",
-    "КПК: рух праворуч. Джерело не ідентифіковано.",
-    "КПК: температура впала. Можлива прихована аномалія.",
-    "КПК: пульс нестабільний. Перевір стан персонажа."
+    "Модуль: зафіксовано аномальну активність. Болти рекомендовано тримати напоготові.",
+    "Модуль: рівень перешкод зріс. Радіосигнал нестабільний.",
+    "Модуль: рух праворуч. Джерело не ідентифіковано.",
+    "Модуль: температура впала. Можлива прихована аномалія.",
+    "Модуль: пульс нестабільний. Перевір стан персонажа."
   ];
   const msg = options[Math.floor(Math.random()*options.length)];
   addLog(msg);
@@ -378,3 +420,4 @@ if("serviceWorker" in navigator){
 }
 
 render();
+applyRoleMode();

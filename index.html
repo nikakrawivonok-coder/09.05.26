@@ -24,6 +24,12 @@
       <span class="plate-mark">→</span>
     </section>
 
+    <section class="session-strip" id="sessionStrip">
+      <div><span>Кімната</span><strong id="roomLabel">local</strong></div>
+      <div><span>Роль</span><strong id="roleLabel">Гравець</strong></div>
+      <div><span>Персонаж</span><strong id="playerLabel">fox</strong></div>
+    </section>
+
     <section class="identity-panel">
       <div class="portrait" aria-label="Портрет сталкера">
         <div class="portrait-inner">
@@ -139,15 +145,15 @@
     </section>
 
     <section class="screen" data-screen="journal">
-      <div class="section-title"><span>▤</span><h3>Журнал КПК</h3></div>
+      <div class="section-title"><span>▤</span><h3>Журнал модуля</h3></div>
       <div class="journal-controls">
-        <button class="metal-btn" id="addKpkMsg">КПК-попередження</button>
+        <button class="metal-btn" id="addKpkMsg">Сигнал модуля</button>
         <button class="metal-btn" id="clearJournal">Очистити</button>
       </div>
       <div id="journalList" class="journal-list"></div>
     </section>
 
-    <section class="screen" data-screen="master">
+    <section class="screen gm-only" data-screen="master">
       <div class="section-title"><span>⚙</span><h3>Майстер</h3></div>
       <details class="gm-panel" open>
         <summary>Стан персонажа</summary>
@@ -194,7 +200,7 @@
       <button class="nav-btn" data-target="environment"><span>◉</span><b>ОТОЧЕННЯ</b></button>
       <button class="nav-btn" data-target="enemies"><span>☠</span><b>ВОРОГИ</b></button>
       <button class="nav-btn" data-target="journal"><span>▤</span><b>ЖУРНАЛ</b></button>
-      <button class="nav-btn" data-target="master"><span>⚙</span><b>МАЙСТЕР</b></button>
+      <button class="nav-btn gm-only" data-target="master"><span>⚙</span><b>МАЙСТЕР</b></button>
     </nav>
 
     <div class="toast" id="toast" hidden></div>
